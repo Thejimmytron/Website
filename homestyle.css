@@ -57,3 +57,35 @@ li a:hover{
     border-radius: 4px;
     color: var(--col1);
 }
+
+.popbtn {
+  padding: 10px 60px;
+  background: #fff;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+.popbtn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--col2);
+  color: #090906;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.popbtn:hover {
+  background: #f7ce2b;
+}
+
+
+.popbtn:active {
+  transform: scale(0.95);
+}
