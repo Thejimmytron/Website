@@ -1,0 +1,36 @@
+@font-face {
+  font-family: BitcountGrid;
+  src: url('fonts/Bitcount/BitcountGridSingle-VariableFont_CRSV,ELSH,ELXP,slnt,wght.ttf') format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: BitcountGrid;
+}
+
+:root {
+  --col1: #180722;
+  --col2: #580E2D;
+  --col3: #4D2259;
+  --col4: #40121F;
+  --col5: #4E2D45;
+}
+
+
+body {
+  background-color: var(--col1);
+  color: black;
+  line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem;
+  font-family: BitcountGrid;
+}
+
