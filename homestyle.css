@@ -16,12 +16,12 @@
   --col3: #4D2259;
   --col4: #40121F;
   --col5: #4E2D45;
+  --col6: #d73030;
 }
 
 
 body {
   background-color: var(--col1);
-  color: black;
   line-height: 1.6;
 }
 
@@ -29,8 +29,31 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 1rem;
   font-family: BitcountGrid;
 }
 
+.logo {
+  width: 250px;
+  height: auto;
+  margin-right: 20px;
+}
+.navbar li {
+    margin: 0 10px;
+}
+li a {
+    background-color: var(--col4);
+    color: var(--col6);
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 40px;
+    transition: 0.3s ease;
+    border-radius: 4px;
+    
+}
+
+li a:hover{
+    background-color: var(--col6);
+    border-radius: 4px;
+    color: var(--col1);
+}
