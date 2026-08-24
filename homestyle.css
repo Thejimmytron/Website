@@ -72,8 +72,8 @@ li a:hover{
 .popbtn {
   display: inline-block;
   padding: 14px 28px;
-  background: var(--col2);
-  color: #090906;
+  background: var(--col4);
+  color: var(--col6);
   text-decoration: none;
   border-radius: 6px;
   font-size: 18px;
@@ -82,10 +82,73 @@ li a:hover{
 }
 
 .popbtn:hover {
-  background: #f7ce2b;
+  background: var(--col6);
+  color: var(--col1);
 }
 
 
 .popbtn:active {
   transform: scale(0.95);
+}
+
+h1 a {
+    display: grid;
+    place-items: center;
+    margin-left: 40%;
+    margin-top: 10%;
+    margin-right: 40%;
+    background-color: var(--col4);
+    color: var(--col6);
+    text-align: center;
+    padding: 30px 60px;
+    text-decoration: none;
+    font-size:80px;
+    transition: 0.3s ease;
+    border-radius: 4px;
+    
+}
+
+h1 a:hover{
+    background-color: var(--col6);
+    border-radius: 4px;
+    color: var(--col1);
+}
+
+footer {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 5px;
+  background: transparent;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+}
+
+.footer li a,
+.popbtn2 {
+  display: block;
+  min-width: 104px;
+  padding: 15px 14px;
+  background-color: var(--col4);
+  color: var(--col6);
+  text-align: center;
+  text-decoration: none;
+  font-size: 23px;
+  line-height: 1.1;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.footer li a:hover,
+.popbtn2:hover {
+  background-color: var(--col6);
+  color: var(--col1);
 }
