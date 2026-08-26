@@ -152,3 +152,8 @@ footer {
   background-color: var(--col6);
   color: var(--col1);
 }
+
+.popbtn2 {
+  display: block;
+}
+
