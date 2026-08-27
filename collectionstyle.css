@@ -172,30 +172,7 @@ footer {
 
 .cardgrid {
   display: grid;
-  grid-template-columns: repeat(4, 143px);
+  grid-template-columns: repeat(4, 180px);
   justify-content: center;
   gap: 20px 26px;
-}
-
-.card {
-  min-height: 138px;
-  padding: 10px;
-  background-color: var(--col4);
-  border: 1px solid var(--col1);
-  border-radius: 4px;
-  color: var(--col6);
-  text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-@media (max-width: 700px) {
-  .collection h1 {
-    font-size: 36px;
-  }
-
-  .cardgrid {
-    grid-template-columns: repeat(2, minmax(120px, 143px));
-    gap: 16px;
-  }
 }
