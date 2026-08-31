@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TD UI Mockup</title>
+  <link rel="stylesheet" href="gamestyle.css" />
+</head>
+<body>
+  <div class="game-shell">
+    <header class="top-bar">
+      <div class="left-hud">
+        <span id="waveText" class="hud-pill">Wave 0</span>
+        <span class="hud-pill">Level 1</span>
+      </div>
+
+      <div class="title">Castle Defense</div>
+
+      <div class="right-hud">
+        <span id="moneyText" class="resource gold">🪙 240</span>
+        <span id="livesText" class="resource health">❤️ 20</span>
+      </div>
+    </header>
+
+    <main class="game-layout">
+      <aside class="panel shop">
+        <h3>Build</h3>
+
+        <button class="tower-card selected" data-type="guard">
+          <span class="icon">🛡️</span>
+          <div>
+            <strong>Guard Tower</strong>
+            <small>$80</small>
+          </div>
+        </button>
+
+        <button class="tower-card" data-type="flame">
+          <span class="icon">🔥</span>
+          <div>
+            <strong>Flame Turret</strong>
+            <small>$120</small>
+          </div>
+        </button>
+
+        <button class="tower-card" data-type="frost">
+          <span class="icon">❄️</span>
+          <div>
+            <strong>Frost Tower</strong>
+            <small>$100</small>
+          </div>
+        </button>
+      </aside>
+
+      <section class="battlefield">
+        <div class="map-grid" id="battlefieldMap">
+          <canvas id="gameCanvas" width="900" height="520"></canvas>
+        </div>
+      </section>
+
+      <aside class="panel info">
+        <div class="info-box">
+          <h4>Objectives</h4>
+          <ul>
+            <li>Defend the gate</li>
+            <li>Survive each wave</li>
+            <li>Upgrade placement</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h4>Selected Tower</h4>
+          <p id="selectedTowerName">Guard Tower</p>
+          <div class="stats">
+            <span id="selectedTowerDamage">DMG: 14</span>
+            <span id="selectedTowerRange">RNG: 120</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="bottom-bar">
+      <button id="pauseBtn" class="btn secondary">Pause</button>
+      <button id="startWaveBtn" class="btn primary">Start Wave</button>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

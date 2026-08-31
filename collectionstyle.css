@@ -172,7 +172,19 @@ footer {
 
 .cardgrid {
   display: grid;
-  grid-template-columns: repeat(4, 180px);
+  grid-template-columns: repeat(4, 240px);
   justify-content: center;
   gap: 20px 26px;
+}
+
+.card {
+  max-height: 260px;
+  padding: 15px;
+  background-color: var(--col4);
+  border: 1px solid var(--col1);
+  border-radius: 4px;
+  color: var(--col6);
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
 }
