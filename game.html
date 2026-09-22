@@ -11,7 +11,7 @@
     <header class="top-bar">
       <div class="left-hud">
         <span id="waveText" class="hud-pill">Wave 0</span>
-        <span class="hud-pill">Level 1</span>
+        <span id="stageText" class="hud-pill">Prep</span>
       </div>
 
       <div class="title">Castle Defense</div>
@@ -49,11 +49,37 @@
             <small>$100</small>
           </div>
         </button>
+
+        <div class="poker-panel">
+          <div class="poker-header">
+            <h3>Tower Hand</h3>
+            <button id="drawHandBtn" class="small-btn">Draw Towers</button>
+          </div>
+
+          <div id="pokerHand" class="poker-hand" aria-live="polite">
+            <div class="poker-card empty">?</div>
+            <div class="poker-card empty">?</div>
+            <div class="poker-card empty">?</div>
+            <div class="poker-card empty">?</div>
+            <div class="poker-card empty">?</div>
+          </div>
+
+          <div id="pokerSummary" class="poker-summary">No towers drawn</div>
+        </div>
       </aside>
 
       <section class="battlefield">
         <div class="map-grid" id="battlefieldMap">
           <canvas id="gameCanvas" width="900" height="520"></canvas>
+
+          <div id="overlay" class="overlay visible">
+            <div class="overlay-card">
+              <span class="overlay-badge">Mission Control</span>
+              <h2 id="overlayTitle">Ready the Defenses</h2>
+              <p id="overlayText">Build your towers, hold the gate, and survive every wave.</p>
+              <button id="overlayBtn" class="btn primary">Start Mission</button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -73,6 +99,22 @@
           <div class="stats">
             <span id="selectedTowerDamage">DMG: 14</span>
             <span id="selectedTowerRange">RNG: 120</span>
+          </div>
+          <div class="stats">
+            <span id="selectedTowerLevel">LVL: 1</span>
+            <span id="selectedTowerNext">UPG: $50</span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h4>Run Status</h4>
+          <div class="stats two-line">
+            <span id="enemyCountText">Enemies: 0</span>
+            <span id="waveStatusText">Prep</span>
+          </div>
+          <div class="upgrade-actions">
+            <button id="upgradeTowerBtn" class="small-btn">Upgrade</button>
+            <button id="sellTowerBtn" class="small-btn danger">Sell</button>
           </div>
         </div>
       </aside>

@@ -153,6 +153,11 @@ footer {
   color: var(--col1);
 }
 
+audio {
+  background-color: var(--col2);
+  color: var(--col4);
+}
+
 .popbtn2 {
   display: block;
 }
