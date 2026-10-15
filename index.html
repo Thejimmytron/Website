@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acefall - Home</title>
   <link rel="stylesheet" href="homestyle.css">
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </head>
 <body>
 
@@ -26,10 +26,24 @@
           Your browser does not support the audio element.
         </audio>
       </li>
-      <li class="popbtn2" onclick="openHelpPopup()">Help</li>
-      
+      <li class="popbtn" onclick="openpopup2()">Help</li>
     </ul>
-    
+    <div class="popup" id="settingspopup">
+      <h2>Settings</h2>
+      <div style="margin: 20px 0;">
+        <p>This is the settings section. You can customize your experience here.</p>
+      </div>
+
+      <button type="button" class="popbtn" onclick="closepopup()">Done</button>
+    </div>
+    <div class="popup2" id="helppopup">
+      <h2>Help</h2>
+      <div style="margin: 20px 0;">
+        <p>This is the help section. helpful information on website and game is here.</p>
+
+      </div>
+      <button type="button" class="popbtn" onclick="closepopup2()">Done</button>
+    </div>
   </footer>
 </body>
 
