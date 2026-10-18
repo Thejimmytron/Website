@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acefall - Home</title>
+  <title>Acefall - Login</title>
   <link rel="stylesheet" href="homestyle.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
 
@@ -19,8 +20,25 @@
   <footer>
     <ul class="footer">
       <li><a href="login.html">Login</a></li>
-      <li class="popbtn2" onclick="openHelpPopup()">Help</li>
+      <li class="popbtn" onclick="openpopup2()">Help</li>
     </ul>
+    <div class="popup" id="settingspopup">
+      <h2>Settings</h2>
+      <div style="margin: 20px 0;">
+        <p>This is the settings section. You can customize your experience here.</p>
+      </div>
+      <audio id="thememusic" controls="">
+        <source src="acefall_theme_song.mp3" type="audio/mpeg">
+      </audio>
+      <button type="button" class="popbtn" onclick="closepopup()">Done</button>
+    </div>
+    <div class="popup2" id="helppopup">
+      <h2>Help</h2>
+      <div style="margin: 20px 0;">
+        <p>This is the help section. helpful information on website and game is here.</p>
+      </div>
+      <button type="button" class="popbtn" onclick="closepopup2()">Done</button>
+    </div>
   </footer>
 </body>
 </html>

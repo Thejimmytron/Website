@@ -17,3 +17,13 @@ function openpopup2() {
 function closepopup2() {
   if (popup2) popup2.classList.remove('open-popup2');
 }
+
+let amountelement = document.getElementById('amount');
+
+function updateamount() {
+  let amount = localStorage.getItem('amount') || 20;
+  amountelement.textContent = `$${amount}`;
+}
+
+
+updateamount();

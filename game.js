@@ -28,15 +28,19 @@ const cardSuits = ['♠', '♥', '♦', '♣'];
 const cardRanks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
 const towerTypes = {
-  guard: { name: 'Guard Tower', cost: 80, damage: 14, range: 120, fireRate: 0.8, color: '#f7c969', sprite: 'tower_guard.png', projectile: 'projectile_guard.png' },
-  flame: { name: 'Flame Turret', cost: 120, damage: 25, range: 90, fireRate: 1.3, color: '#ff7b54', sprite: 'tower_flame.png', projectile: 'projectile_flame.png' },
-  frost: { name: 'Frost Tower', cost: 100, damage: 12, range: 140, fireRate: 1.0, color: '#7fe0ff', sprite: 'tower_frost.png', projectile: 'projectile_frost.png' }
+  flame: { name: 'Flame Tower', cost: 120, damage: 25, range: 90, fireRate: 1.3, color: '#ff7b54', sprite: 'tower_flame.png', projectile: 'projectile_flame.png', icon: '🔥' },
+  frost: { name: 'Frost Tower', cost: 100, damage: 12, range: 140, fireRate: 1.0, color: '#7fe0ff', sprite: 'tower_frost.png', projectile: 'projectile_frost.png', icon: '❄️' },
+  archer: { name: 'Archer Tower', cost: 90, damage: 10, range: 130, fireRate: 0.55, color: '#83d17b', sprite: 'tower_guard.png', projectile: 'projectile_guard.png', icon: '🏹' },
+  cannon: { name: 'Cannon Tower', cost: 150, damage: 40, range: 105, fireRate: 1.8, color: '#bd8b70', sprite: 'tower_flame.png', projectile: 'projectile_flame.png', icon: '💣' },
+  lightning: { name: 'Lightning Tower', cost: 160, damage: 18, range: 150, fireRate: 0.65, color: '#c8a5ff', sprite: 'tower_frost.png', projectile: 'projectile_frost.png', icon: '⚡' },
+  farm: { name: 'Farm Tower', cost: 125, damage: 0, range: 0, fireRate: 5, income: 10, color: '#7fe0a2', sprite: 'tower_guard.png', projectile: 'projectile_guard.png', icon: '💰' },
+  sniper: { name: 'Sniper Tower', cost: 180, damage: 55, range: 230, fireRate: 2.4, color: '#f58ca8', sprite: 'tower_frost.png', projectile: 'projectile_frost.png', icon: '🎯' },
+  boomerang: { name: 'Boomerang Tower', cost: 130, damage: 18, range: 125, fireRate: 0.9, color: '#ffd166', sprite: 'tower_flame.png', projectile: 'projectile_flame.png', icon: '🪃' }
 };
 
 const sprites = {
   base: loadSprite('images/base.png'),
   enemy: loadSprite('images/enemy.png'),
-  guard: loadSprite('images/tower_guard.png'),
   flame: loadSprite('images/tower_flame.png'),
   frost: loadSprite('images/tower_frost.png'),
   projectile_guard: loadSprite('images/projectile_guard.png'),
@@ -54,7 +58,7 @@ const game = {
   money: 240,
   lives: 20,
   wave: 0,
-  currentTowerType: 'guard',
+  currentTowerType: 'archer',
   currentTowerCard: null,
   paused: false,
   started: false,
@@ -90,11 +94,7 @@ const game = {
 };
 
 function getTowerCardIcon(type) {
-  return {
-    guard: '🛡️',
-    flame: '🔥',
-    frost: '❄️'
-  }[type] || '🏰';
+  return towerTypes[type]?.icon || '🏰';
 }
 
 function createDeck() {
@@ -262,8 +262,10 @@ function updateSelectedTowerPanel() {
 
   const stats = towerTypes[tower.type];
   selectedTowerName.textContent = stats.name;
-  selectedTowerDamage.textContent = `DMG: ${Math.round(tower.damage)}`;
-  selectedTowerRange.textContent = `RNG: ${Math.round(tower.range)}`;
+  selectedTowerDamage.textContent = tower.type === 'farm'
+    ? `INCOME: $${Math.round(tower.income)}`
+    : `DMG: ${Math.round(tower.damage)}`;
+  selectedTowerRange.textContent = tower.type === 'farm' ? `RATE: ${stats.fireRate}s` : `RNG: ${Math.round(tower.range)}`;
   selectedTowerLevel.textContent = `LVL: ${tower.level}`;
   const upgradeCost = tower.level >= 4 ? 'MAX' : `$${getTowerUpgradeCost(tower)}`;
   selectedTowerNext.textContent = `UPG: ${upgradeCost}`;
@@ -297,8 +299,8 @@ function updateHud() {
     updateSelectedTowerPanel();
   } else {
     selectedTowerName.textContent = tower.name;
-    selectedTowerDamage.textContent = `DMG: ${tower.damage}`;
-    selectedTowerRange.textContent = `RNG: ${tower.range}`;
+    selectedTowerDamage.textContent = game.currentTowerType === 'farm' ? `INCOME: $${tower.income}` : `DMG: ${tower.damage}`;
+    selectedTowerRange.textContent = game.currentTowerType === 'farm' ? `RATE: ${tower.fireRate}s` : `RNG: ${tower.range}`;
     selectedTowerLevel.textContent = 'LVL: 1';
     selectedTowerNext.textContent = `UPG: $${Math.round(tower.cost * 0.7)}`;
     upgradeTowerBtn.disabled = true;
@@ -416,6 +418,16 @@ function shootTower(tower, target) {
 
 function handleTowers() {
   for (const tower of game.towers) {
+    if (tower.type === 'farm') {
+      if (!tower.cooldown || tower.cooldown <= 0) {
+        tower.cooldown = towerTypes.farm.fireRate;
+        game.money += Math.round(towerTypes.farm.income * (1 + (tower.level - 1) * 0.5) * getRewardMultiplier());
+        updateHud();
+      }
+      tower.cooldown -= 1 / 60;
+      continue;
+    }
+
     let target = null;
     let closest = Infinity;
 
@@ -579,6 +591,7 @@ function placeTower(x, y) {
     range: towerConfig.range,
     damage: towerConfig.damage,
     fireRate: towerConfig.fireRate,
+    income: towerConfig.income || 0,
     color: towerConfig.color,
     type: game.currentTowerType,
     level: 1,
@@ -600,9 +613,13 @@ function upgradeSelectedTower() {
 
   game.money -= cost;
   tower.level += 1;
-  tower.damage *= 1.42;
-  tower.range *= 1.08;
-  tower.fireRate = Math.max(0.38, tower.fireRate * 0.9);
+  if (tower.type === 'farm') {
+    tower.income *= 1.5;
+  } else {
+    tower.damage *= 1.42;
+    tower.range *= 1.08;
+    tower.fireRate = Math.max(0.38, tower.fireRate * 0.9);
+  }
   updateHud();
 }
 
@@ -758,16 +775,23 @@ function drawBase() {
 function drawTower(tower) {
   const sprite = sprites[tower.type];
 
-  if (sprite && sprite.complete) {
+  if (['flame', 'frost'].includes(tower.type) && sprite && sprite.complete) {
     ctx.drawImage(sprite, tower.x - 22, tower.y - 22, 44, 44);
   } else {
-    ctx.fillStyle = tower.color;
+    ctx.fillStyle = 'rgba(24, 7, 34, 0.9)';
     ctx.beginPath();
-    ctx.arc(tower.x, tower.y, 12, 0, Math.PI * 2);
+    ctx.arc(tower.x, tower.y, 20, 0, Math.PI * 2);
     ctx.fill();
+    ctx.strokeStyle = tower.color;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.font = '22px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(towerTypes[tower.type].icon, tower.x, tower.y);
   }
 
-  if (game.selectedTowerId === tower.id) {
+  if (game.selectedTowerId === tower.id && tower.range > 0) {
     ctx.strokeStyle = 'rgba(247, 201, 105, 0.9)';
     ctx.lineWidth = 2;
     ctx.beginPath();
