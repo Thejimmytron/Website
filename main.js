@@ -21,6 +21,7 @@ function closepopup2() {
 let amountelement = document.getElementById('amount');
 
 function updateamount() {
+  if (!amountelement) return;
   let amount = localStorage.getItem('amount') || 20;
   amountelement.textContent = `$${amount}`;
 }
